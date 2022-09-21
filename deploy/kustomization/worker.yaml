@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyapi-worker
+  labels:
+    app.kubernetes.io/name: pyapi
+    app.kubernetes.io/instance: pyapi-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pyapi
+      app.kubernetes.io/instance: pyapi-worker
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pyapi
+        app.kubernetes.io/instance: pyapi-worker
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+        - name: pyapi-worker
+          args:
+            - "dramatiq"
+            - "app.main:broker"
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: "dannylongeuay/ndsq-pyapi:patchme"
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: pyapi
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - emptyDir: {}
+          name: tmp

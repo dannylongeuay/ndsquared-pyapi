@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyapi
+  labels:
+    app.kubernetes.io/name: pyapi
+    app.kubernetes.io/instance: pyapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pyapi
+      app.kubernetes.io/instance: pyapi
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pyapi
+        app.kubernetes.io/instance: pyapi
+    spec:
+      securityContext:
+        fsGroup: 2000
+      containers:
+        - name: pyapi
+          args:
+            - "uvicorn"
+            - "app.main:app"
+            - "--host=0.0.0.0"
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: "dannylongeuay/ndsq-pyapi:patchme"
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: pyapi
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - emptyDir: {}
+          name: tmp

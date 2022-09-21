@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pyapi
+  labels:
+    app.kubernetes.io/name: pyapi
+    app.kubernetes.io/instance: pyapi
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: pyapi
+    app.kubernetes.io/instance: pyapi

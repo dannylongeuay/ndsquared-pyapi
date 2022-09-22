@@ -26,7 +26,23 @@ class Settings(BaseSettings):
     API_ENVIRONMENT: Environment = Environment.PRODUCTION
 
 
-app = FastAPI()
+tags_metadata = [
+    {
+        "name": "health",
+        "description": "Operations for checking the health of the API",
+    },
+    {
+        "name": "test",
+        "description": "Test endpoints",
+    },
+]
+
+app = FastAPI(
+    title="Pyapi",
+    description="Python API using FastAPI library",
+    version="1.0.0",
+    openapi_tags=tags_metadata,
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -87,12 +103,12 @@ class DelayResponse(BaseModel):
         }
 
 
-@app.get("/ping", response_model=PingResponse)
+@app.get("/ping", response_model=PingResponse, tags=["health"])
 def ping():
     return PingResponse(message="pong")
 
 
-@app.post("/delay", response_model=DelayResponse)
+@app.post("/delay", response_model=DelayResponse, tags=["test"])
 async def delay(req: DelayRequest):
     logging.info(req)
     actor = delay_actor.send(req.dict())

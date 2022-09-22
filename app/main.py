@@ -87,7 +87,7 @@ class DelayRequest(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "amount": 5,
+                "amount": 3,
             }
         }
 

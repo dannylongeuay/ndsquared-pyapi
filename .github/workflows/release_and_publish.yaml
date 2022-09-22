@@ -9,11 +9,14 @@ on:
       - "poetry.lock"
 jobs:
   release:
-    name: release
+    name: Semantic Release
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{steps.gsr_action.outputs.version}}
     steps:
       - uses: actions/checkout@master
       - uses: go-semantic-release/action@v1
+        id: gsr_action
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   publish:

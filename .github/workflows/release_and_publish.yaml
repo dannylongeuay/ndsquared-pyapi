@@ -18,6 +18,7 @@ jobs:
       - uses: go-semantic-release/action@v1
         id: gsr_action
         with:
+          update-file: deploy/kustomization/deployment.yaml,deploy/kustomization/worker.yaml
           github-token: ${{ secrets.GITHUB_TOKEN }}
   publish:
     name: Publish image to Docker Hub

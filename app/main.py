@@ -87,7 +87,7 @@ class DelayRequest(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "amount": 3,
+                "amount": 4,
             }
         }
 
@@ -98,7 +98,7 @@ class DelayResponse(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "message": "Delayed for 3 second(s)",
+                "message": "Delayed for 4 second(s)",
             }
         }
 

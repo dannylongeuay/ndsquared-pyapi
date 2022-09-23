@@ -4,3 +4,6 @@ resources:
   - service.yaml
   - deployment.yaml
   - worker.yaml
+images:
+  - name: dannylongeuay/ndsq-pyapi
+    newTag: 1.0.6

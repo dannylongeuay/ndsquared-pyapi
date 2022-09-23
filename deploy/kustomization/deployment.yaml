@@ -32,7 +32,7 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
-          image: "dannylongeuay/ndsq-pyapi:patchme"
+          image: "dannylongeuay/ndsq-pyapi:latest"
           imagePullPolicy: Always
           envFrom:
             - secretRef:

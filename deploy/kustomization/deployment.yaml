@@ -51,10 +51,9 @@ spec:
               port: http
           resources:
             limits:
-              cpu: 1
               memory: 512Mi
             requests:
-              cpu: 100m
+              cpu: 50m
               memory: 128Mi
           volumeMounts:
             - mountPath: /tmp

@@ -38,7 +38,7 @@ tags_metadata = [
 ]
 
 app = FastAPI(
-    title="Pyapi",
+    title="PyAPI",
     description="Python API using FastAPI library",
     version="1.0.1",
     openapi_tags=tags_metadata,

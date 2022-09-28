@@ -3,7 +3,8 @@ kind: Kustomization
 resources:
   - service.yaml
   - deployment.yaml
-  - worker.yaml
+  # Disabling worker to save on Kubernetes resources while it is not in active use
+  # - worker.yaml
 images:
   - name: dannylongeuay/ndsq-pyapi
     newTag: 1.0.7

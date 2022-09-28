@@ -40,7 +40,7 @@ tags_metadata = [
 app = FastAPI(
     title="Pyapi",
     description="Python API using FastAPI library",
-    version="1.0.0",
+    version="1.0.1",
     openapi_tags=tags_metadata,
 )
 app.add_middleware(

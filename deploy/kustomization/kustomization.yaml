@@ -7,4 +7,4 @@ resources:
   # - worker.yaml
 images:
   - name: dannylongeuay/ndsq-pyapi
-    newTag: 1.1.0
+    newTag: 1.2.0

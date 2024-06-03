@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "api"
+name = "pyapi"
 version = "1.2.0"
 description = ""
 authors = ["Daniel Longeuay <dannylongeuay@yahoo.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -12,19 +13,11 @@ dramatiq = {extras = ["redis", "watch"], version = "^1.12.1"}
 fastapi-auth0 = "^0.3.0"
 requests = "^2.27.1"
 
-[tool.poetry.dev-dependencies]
-black = "^22.1.0"
-flake8 = "^4.0.1"
-pytest = "^7.0.1"
-debugpy = "^1.5.1"
-python-lsp-server = "^1.4.1"
-pyls-flake8 = "^0.4.0"
-pylsp-mypy = "^0.5.8"
-pyls-isort = "^0.2.2"
-python-lsp-black = "^1.2.1"
+# [tool.pyright]
+# typeCheckingMode = "strict"
 
-[tool.pyright]
-typeCheckingMode = "strict"
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
